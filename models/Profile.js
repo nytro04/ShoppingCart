@@ -32,4 +32,6 @@ const ProfileSchema = new Schema({
   }
 });
 
+// @todo: add recent orders
+
 module.exports = Profile = mongoose.model("profile", ProfileSchema);

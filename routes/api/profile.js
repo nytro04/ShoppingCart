@@ -101,4 +101,6 @@ router.post(
   }
 );
 
+// @todo: all get all profiles for admins
+
 module.exports = router;
