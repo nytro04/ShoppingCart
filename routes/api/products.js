@@ -67,7 +67,6 @@ router.post(
 
     // save new product to db
     newProduct.save().then(product => res.json(product));
-    // console.log(req.user.id);
   }
 );
 

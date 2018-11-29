@@ -49,11 +49,11 @@ router.post(
     const { errors, isValid } = validateProfileInput(req.body);
     const {
       title,
-      company,
+      // company,
       address,
       location,
       country,
-      city,
+      // city,
       phone
     } = req.body;
 
@@ -67,9 +67,9 @@ router.post(
     const profileFields = {};
     profileFields.user = req.user.id;
     if (title) profileFields.title = title;
-    if (company) profileFields.company = company;
+    // if (company) profileFields.company = company;
     if (country) profileFields.country = country;
-    if (city) profileFields.city = city;
+    // if (city) profileFields.city = city;
     if (location) profileFields.location = location;
     if (address) profileFields.address = address;
     if (phone) profileFields.phone = phone;
@@ -97,6 +97,21 @@ router.post(
           new Profile(profileFields).save().then(profile => res.json(profile));
         });
       }
+    });
+  }
+);
+
+// @route  DELETE api/profile
+// desc    Delete user and profile
+// access   Private
+router.delete(
+  "/",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    Profile.findOneAndRemove({ user: req.user.id }).then(() => {
+      User.findOneAndRemove({ _id: req.user.id }).then(() =>
+        res.json({ success: true })
+      );
     });
   }
 );

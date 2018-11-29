@@ -20,9 +20,9 @@ module.exports = function validateProductInput(data) {
     errors.description = "Description field is required";
   }
 
-  //   if (Validator.isEmpty(data.price)) {
-  //     errors.price = "Price field is required";
-  //   }
+  if (Validator.isEmpty(data.price)) {
+    errors.price = "Price field is required";
+  }
 
   return {
     errors,
