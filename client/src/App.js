@@ -16,7 +16,9 @@ import PrivateRoute from "./components/common/PrivateRoute";
 import CreateProfile from "./components/create-profile/CreateProfile";
 import EditProfile from "./components/edit-profile/EditProfile";
 import Products from "./components/products/Products";
+import Product from "./components/products/Product";
 import ProductForm from "./components/products/ProductForm";
+import EditProduct from "./components/products/EditProduct";
 
 // Check for token
 if (localStorage.jwtToken) {
@@ -53,6 +55,7 @@ class App extends Component {
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               <Route exact path="/products" component={Products} />
+              <Route exact path="/product/:id" component={Product} />
               <Switch>
                 <PrivateRoute exact path="/dashboard" component={Dashboard} />
               </Switch>
@@ -75,6 +78,13 @@ class App extends Component {
                   exact
                   path="/add-product"
                   component={ProductForm}
+                />
+              </Switch>
+              <Switch>
+                <PrivateRoute
+                  exact
+                  path="/edit-product/:id"
+                  component={EditProduct}
                 />
               </Switch>
             </div>

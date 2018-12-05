@@ -11,11 +11,6 @@ const Profile = require("../../models/Profile");
 // Validation
 const validateProductInput = require("../../validation/product");
 
-// @route       GET api/products/test
-// @desc        Test products route
-// @access      Public
-router.get("/test", (req, res) => res.json({ msg: "Products works" }));
-
 // @route       GET api/products
 // @desc        Get all products
 // @access      Public
@@ -40,15 +35,16 @@ router.get("/:id", (req, res) => {
 });
 
 // @route       POST api/products
-// @desc        Create products
+// @desc        Create products or Edit Product
 // @access      Private // TODO... for admins only
 router.post(
   "/",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
     // Destructuring
-    const { name, description, price, image } = req.body;
+
     const { errors, isValid } = validateProductInput(req.body);
+    const { name, description, price, image } = req.body;
 
     // Check validation
     if (!isValid) {
@@ -67,6 +63,45 @@ router.post(
 
     // save new product to db
     newProduct.save().then(product => res.json(product));
+  }
+);
+
+// @route       PUT api/products/:id
+// @desc        Edit products
+// @access      Private // TODO... for admins only
+router.put(
+  "/:id",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    // Destructuring
+    const { errors, isValid } = validateProductInput(req.body);
+    const { name, description, price, image } = req.body;
+
+    // Check validation
+    if (!isValid) {
+      // if any errors, send 400 with errors object
+      return res.status(400).json(errors);
+    }
+
+    // Get fields
+    const productFields = {};
+
+    if (name) productFields.name = name;
+    if (description) productFields.description = description;
+    if (price) productFields.price = price;
+    if (image) productFields.image = image;
+
+    //Find product and update or create
+    Product.findOne(req.params.id).then(product => {
+      // if product exist, udpdate
+      if (product) {
+        Product.findOneAndUpdate(
+          req.params.id,
+          { $set: productFields },
+          { new: true }
+        ).then(product => res.json(product));
+      }
+    });
   }
 );
 

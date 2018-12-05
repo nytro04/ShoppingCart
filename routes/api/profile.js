@@ -11,11 +11,6 @@ const Profile = require("../../models/Profile");
 // Load User model
 const User = require("../../models/User");
 
-// @route       GET api/profile/test
-// @desc        Test profile route
-// @access      Public
-router.get("/test", (req, res) => res.json({ msg: "Profile works" }));
-
 // @route       GET api/profile
 // @desc        Get Profile of current users
 // @access      Private => only admin can view profile of users, will implememnt admin later
@@ -47,15 +42,7 @@ router.post(
   (req, res) => {
     //Desconstruct fields
     const { errors, isValid } = validateProfileInput(req.body);
-    const {
-      title,
-      // company,
-      address,
-      location,
-      country,
-      // city,
-      phone
-    } = req.body;
+    const { title, address, location, country, phone } = req.body;
 
     // Check Validation
     if (!isValid) {

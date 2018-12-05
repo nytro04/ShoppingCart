@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import Spinner from "../common/Spinner";
 import { getProducts } from "../../actions/productActions";
 import ProductItem from "./ProductItem";
+import AllProduct from "./AllProduct";
 
 class Products extends Component {
   componentDidMount() {
@@ -17,17 +18,13 @@ class Products extends Component {
     if (products === null || loading) {
       productContent = <Spinner />;
     } else {
-      productContent = products.map(product => (
-        <ProductItem key={product._id} product={product} />
-      ));
+      productContent = <AllProduct products={products} />;
     }
 
     return (
       <div className="products">
         <div className="container">
-          <div className="row">
-            <div className="col-md-12">{productContent}</div>
-          </div>
+          <div className="row">{productContent}</div>
         </div>
       </div>
     );

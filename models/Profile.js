@@ -10,13 +10,13 @@ const ProfileSchema = new Schema({
   title: {
     type: String
   },
-  // company: {
+  // color: {
   //   type: String
   // },
   country: {
     type: String
   },
-  // city: {
+  // model: {
   //   type: String
   // },
   location: {

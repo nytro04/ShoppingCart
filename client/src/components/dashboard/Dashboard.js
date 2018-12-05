@@ -5,7 +5,7 @@ import { getCurrentProfile, deleteAccount } from "../../actions/profileActions";
 import Spinner from "../common/Spinner";
 import { Link } from "react-router-dom";
 import ProfileActions from "./ProfileActions";
-import Info from "./Info";
+// import Info from "./Info";
 
 class Dashboard extends Component {
   componentDidMount() {

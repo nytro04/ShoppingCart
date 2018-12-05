@@ -20,7 +20,7 @@ class Login extends Component {
   componentWillReceiveProps(nextProps) {
     // todo => add auth for admin users
     if (nextProps.auth.isAuthenticated) {
-      this.props.history.push("/dashboard");
+      this.props.history.push("/products");
     }
 
     if (nextProps.errors) {
