@@ -7,6 +7,14 @@ import ProductItem from "./ProductItem";
 import AllProduct from "./AllProduct";
 
 class Products extends Component {
+  // constructor(props) {
+  //   super(props);
+  //   this.state = {
+  //     product: null
+  //   };
+  //   this.props.getProducts();
+  // }
+
   componentDidMount() {
     this.props.getProducts();
   }

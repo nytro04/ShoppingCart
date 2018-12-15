@@ -74,13 +74,13 @@ class Product extends Component {
                           </div>
                           <hr />
 
-                          <a href="#" className="btn  btn-outline-dark">
+                          <Link to="/carts" className="btn  btn-outline-dark">
                             {" "}
                             Add To Cart{" "}
-                          </a>
-                          <a href="#" className="btn  btn-outline-dark mx-3">
+                          </Link>
+                          <Link to="#" className="btn  btn-outline-dark mx-3">
                             CheckOut{" "}
-                          </a>
+                          </Link>
                         </article>
                       </aside>
                     </div>

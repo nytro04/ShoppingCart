@@ -20,7 +20,7 @@ export default function(state = initialState, action) {
     case "GET_PRODUCT":
       return {
         ...state,
-        products: action.payload,
+        product: action.payload,
         loading: false
       };
     case "ADD_PRODUCT":

@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
-import classnames from "classnames";
 import { Link } from "react-router-dom";
 import { deleteProduct } from "../../actions/productActions";
 
@@ -22,7 +21,8 @@ class ProductItem extends Component {
                   className="card-notify-badge"
                   to={`/edit-product/${product._id}`}
                 >
-                  <i class="fas fa-edit" />
+                  {/* <i class="fas fa-edit" /> */}
+                  <i class="fas fa-pencil-alt" />
                 </Link>
               ) : null}
 
@@ -31,7 +31,7 @@ class ProductItem extends Component {
                   onClick={this.onDeleteClick.bind(this, product._id)}
                   className="card-notify-delete"
                 >
-                  <i className="fas fa-times" />
+                  <i class="far fa-trash-alt" />
                 </span>
               ) : null}
 
@@ -52,7 +52,7 @@ class ProductItem extends Component {
               <div className="ad-title m-auto">
                 <p>{product.description}...</p>
               </div>
-              <Link className="ad-btn mx-1" to="#">
+              <Link className="ad-btn mx-1" to="/carts">
                 <i className="fas fa-shopping-cart" />
               </Link>
               <Link className="ad-btn mx-1" to={`/product/${product._id}`}>
