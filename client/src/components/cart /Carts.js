@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 
 class Cart extends Component {
+  // onDeleteClick = id => {
+  //   this.props.deleteProduct(id);
+  // };
   render() {
     return (
       <div className="card card-body">
@@ -21,7 +24,10 @@ class Cart extends Component {
           <div className="col md-1">
             <h3>Total of Price and quantity goes here</h3>
           </div>
-          <div className="col md-1">
+          <div
+            className="col md-1"
+            // onClick={this.onDeleteClick.bind(this, cart._id)}
+          >
             <i class="far fa-trash-alt" />
           </div>
         </div>
@@ -30,4 +36,11 @@ class Cart extends Component {
   }
 }
 
-export default connect()(Cart);
+const mapStateToProps = state => ({
+  cart: state.cart
+});
+
+export default connect(
+  mapStateToProps,
+  {}
+)(Cart);

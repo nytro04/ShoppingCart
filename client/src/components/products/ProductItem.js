@@ -5,6 +5,13 @@ import { Link } from "react-router-dom";
 import { deleteProduct } from "../../actions/productActions";
 
 class ProductItem extends Component {
+
+  onAddCartClick = (cartItem) => {
+    cartItem = {
+      
+    }
+  }
+
   onDeleteClick = id => {
     this.props.deleteProduct(id);
   };
@@ -28,7 +35,7 @@ class ProductItem extends Component {
 
               {product.user === auth.user.id ? (
                 <span
-                  onClick={this.onDeleteClick.bind(this, product._id)}
+                  onClick={this.onDeleteClick.bind(this)}
                   className="card-notify-delete"
                 >
                   <i class="far fa-trash-alt" />
@@ -52,9 +59,11 @@ class ProductItem extends Component {
               <div className="ad-title m-auto">
                 <p>{product.description}...</p>
               </div>
-              <Link className="ad-btn mx-1" to="/carts">
+              <span
+              onClick={this.onAddCartClick.bind(this, )}
+              className="ad-btn mx-1" >
                 <i className="fas fa-shopping-cart" />
-              </Link>
+              </span>
               <Link className="ad-btn mx-1" to={`/product/${product._id}`}>
                 <i className="fas fa-eye" />
               </Link>
