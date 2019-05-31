@@ -1,6 +1,8 @@
 const Validator = require("validator");
 const isEmpty = require("./is-empty");
 
+//@todo use express to check validation
+
 module.exports = function validateRegisterInput(data) {
   let errors = {};
 

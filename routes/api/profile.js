@@ -6,14 +6,16 @@ const passport = require("passport");
 // Load Validation
 const validateProfileInput = require("../../validation/profile");
 
-// Load Profile model
+// Load Profile and User Model
 const Profile = require("../../models/Profile");
-// Load User model
 const User = require("../../models/User");
+
+// Load admin middleware
+const admin = require("../../config/admin");
 
 // @route       GET api/profile
 // @desc        Get Profile of current users
-// @access      Private => only admin can view profile of users, will implememnt admin later
+// @access      Private
 router.get(
   "/",
   passport.authenticate("jwt", { session: false }),
@@ -24,7 +26,7 @@ router.get(
       .populate("user", ["email", "name"])
       .then(profile => {
         if (!profile) {
-          errors.noprofile = "There is no profile for this user";
+          errors.noprofile = "This user has no profile";
           return res.status(404).json(errors);
         }
         res.json(profile);
@@ -52,11 +54,10 @@ router.post(
 
     // Get fields
     const profileFields = {};
+
     profileFields.user = req.user.id;
     if (title) profileFields.title = title;
-    // if (company) profileFields.company = company;
     if (country) profileFields.country = country;
-    // if (city) profileFields.city = city;
     if (location) profileFields.location = location;
     if (address) profileFields.address = address;
     if (phone) profileFields.phone = phone;
@@ -72,17 +73,7 @@ router.post(
         ).then(profile => res.json(profile));
       } else {
         // Create new profile
-
-        // Check if phone number exists
-        Profile.findOne({ phonenNumber: profileFields.phone }).then(profile => {
-          if (profile) {
-            errors.phonenNumber = "This phone number already exist";
-            res.status(400).json(errors);
-          }
-
-          // Save Profile
-          new Profile(profileFields).save().then(profile => res.json(profile));
-        });
+        new Profile(profileFields).save().then(profile => res.json(profile));
       }
     });
   }
@@ -100,6 +91,32 @@ router.delete(
         res.json({ success: true })
       );
     });
+  }
+);
+
+// @route  DELETE api/profile/user/:user_id
+// desc    Get Profile by user ID
+// access   Private
+router.get(
+  "/user/:user_id",
+  passport.authenticate("jwt", { session: false }),
+  admin,
+  (req, res) => {
+    const errors = {};
+
+    Profile.findOne({ user: req.params.user_id })
+      .populate("user", ["name", "email"])
+      .then(profile => {
+        if (!profile) {
+          errors.noprofile = "There is no profile for the user";
+          res.status(404).json(errors);
+        }
+
+        res.json(profile);
+      })
+      .catch(err =>
+        res.status(404).json({ profile: "There is no profile for the user" })
+      );
   }
 );
 

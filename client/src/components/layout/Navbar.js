@@ -29,7 +29,7 @@ class Navbar extends Component {
           </a>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/send to cart">
+          <Link className="nav-link" to="/cart">
             <i className="fas fa-shopping-cart" />
           </Link>
         </li>
@@ -49,7 +49,7 @@ class Navbar extends Component {
           </Link>
         </li>
         <li className="nav-item">
-          <Link className="nav-link" to="/send to cart">
+          <Link className="nav-link" to="/cart">
             <i className="fas fa-shopping-cart" />
           </Link>
         </li>
@@ -76,7 +76,7 @@ class Navbar extends Component {
               <li className="nav-item">
                 <Link className="nav-link" to="/products">
                   {" "}
-                  All Products
+                  Home
                 </Link>
               </li>
               <li className="nav-item">

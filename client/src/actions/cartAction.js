@@ -1,16 +1,23 @@
+import { ADD_CART_ITEM, REMOVE_CART_ITEM, GET_CART } from "./types";
+
 // Add TO Cart
-export const addToCart = cartItem => {
-  // axios call to backend goes here
-  return {
-    type: "ADD_TO_CART",
+export const addToCart = cartItem => dispatch => {
+  dispatch({
+    type: ADD_CART_ITEM,
     payload: cartItem
-  };
+  });
 };
 
-export const RemoveItem = id => {
-  // axios call to backend goes here
-  return {
-    type: "REMOVE_ITEM",
+export const getCart = () => dispatch => {
+  dispatch({
+    type: GET_CART,
+    payload: JSON.parse(localStorage.getItem("Cart"))
+  });
+};
+
+export const removeFromCart = id => dispatch => {
+  dispatch({
+    type: REMOVE_CART_ITEM,
     payload: id
-  };
+  });
 };

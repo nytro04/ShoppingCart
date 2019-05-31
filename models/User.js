@@ -6,14 +6,15 @@ const UserSchema = new Schema({
   name: {
     type: String,
     minlength: 3,
-    maxlength: 50,
-    required: true
+    maxlength: 100,
+    required: true,
+    trim: true
   },
   email: {
     type: String,
     unique: true,
     minlength: 5,
-    maxlength: 255,
+    maxlength: 100,
     required: true
   },
   password: {
@@ -26,11 +27,11 @@ const UserSchema = new Schema({
   date: {
     type: Date,
     default: Date.now
+  },
+  role: {
+    type: Number,
+    default: 0
   }
-  // admin: {
-  //   type: Boolean,
-  //   default: false
-  // }
 });
 
 module.exports = User = mongoose.model("users", UserSchema);

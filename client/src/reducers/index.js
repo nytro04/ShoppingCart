@@ -3,7 +3,7 @@ import authReducer from "./authReducer";
 import errorReducer from "./errorReducer";
 import profileReducer from "./profileReducer";
 import productReducer from "./productReducer";
-import cartReducer from "./authReducer";
+import cartReducer from "./cartReducer";
 
 export default combineReducers({
   auth: authReducer,

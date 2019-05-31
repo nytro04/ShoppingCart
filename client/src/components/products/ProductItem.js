@@ -3,21 +3,29 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import { deleteProduct } from "../../actions/productActions";
+import { addToCart } from "../../actions/cartAction";
 
 class ProductItem extends Component {
+  // adds cart item to cart list
+  HandleAddToCart = () => {
+    // const cartItem = {
+    //   id: product._id,
+    //   name: product.name,
+    //   description: product.description,
+    //   price: product.price
+    // };
 
-  onAddCartClick = (cartItem) => {
-    cartItem = {
-      
-    }
-  }
+    this.props.addToCart(this.props.product);
+    // console.log(this.props.product);
+  };
 
   onDeleteClick = id => {
     this.props.deleteProduct(id);
   };
 
   render() {
-    const { auth, product } = this.props;
+    const { auth, product, cart } = this.props;
+    // console.log(cart);
     return (
       <div className="container">
         <div className="row" id="ads">
@@ -59,9 +67,7 @@ class ProductItem extends Component {
               <div className="ad-title m-auto">
                 <p>{product.description}...</p>
               </div>
-              <span
-              onClick={this.onAddCartClick.bind(this, )}
-              className="ad-btn mx-1" >
+              <span onClick={this.HandleAddToCart} className="ad-btn mx-1">
                 <i className="fas fa-shopping-cart" />
               </span>
               <Link className="ad-btn mx-1" to={`/product/${product._id}`}>
@@ -78,14 +84,17 @@ class ProductItem extends Component {
 ProductItem.propTypes = {
   deleteProduct: PropTypes.func.isRequired,
   product: PropTypes.object.isRequired,
-  auth: PropTypes.object.isRequired
+  auth: PropTypes.object.isRequired,
+  addToCart: PropTypes.func.isRequired,
+  cart: PropTypes.object.isRequired
 };
 
 const mapStateToProps = state => ({
-  auth: state.auth
+  auth: state.auth,
+  cart: state.cart
 });
 
 export default connect(
   mapStateToProps,
-  { deleteProduct }
+  { deleteProduct, addToCart }
 )(ProductItem);

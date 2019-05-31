@@ -1,6 +1,6 @@
 const express = require("express");
 const router = express.Router();
-const gravatar = require("gravatar");
+// const gravatar = require("gravatar");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const keys = require("../../config/keys");
@@ -18,6 +18,7 @@ const User = require("../../models/User");
 // @access      Public
 router.post("/register", (req, res) => {
   const { errors, isValid } = validateRegisterInput(req.body);
+  const { name, email, password } = req.body;
 
   // Check validation
   if (!isValid) {
@@ -30,23 +31,15 @@ router.post("/register", (req, res) => {
       errors.email = "Email already taken";
       return res.status(400).json(errors);
     } else {
-      // Handling avatar with gravatar
-      const avatar = gravatar.url(req.body.email, {
-        s: "200", // Size
-        r: "pg", // Rating
-        d: "mm" // Default
-      });
-
       // Create new user if email is not on db
       const newUser = new User({
-        name: req.body.name,
-        email: req.body.email,
-        avatar,
-        password: req.body.password
+        name,
+        email,
+        password
       });
 
       // Hashing passwords with bcrypt
-      bcrypt.genSalt(10, (err, salt) => {
+      bcrypt.genSalt(14, (err, salt) => {
         bcrypt.hash(newUser.password, salt, (err, hash) => {
           if (err) throw err;
           newUser.password = hash;
@@ -73,8 +66,10 @@ router.post("/login", (req, res) => {
     return res.status(400).json(errors);
   }
 
-  const email = req.body.email;
-  const password = req.body.password;
+  // const email = req.body.email;
+  // const password = req.body.password;
+
+  const { email, password } = req.body;
 
   // Find user by email on db
   User.findOne({ email }).then(user => {
@@ -96,7 +91,7 @@ router.post("/login", (req, res) => {
         jwt.sign(
           payload,
           keys.secretOrKey,
-          { expiresIn: 36000 },
+          { expiresIn: 25200 },
           (err, token) => {
             res.json({
               success: true,
@@ -119,7 +114,10 @@ router.get(
   "/current",
   passport.authenticate("jwt", { session: false }),
   (req, res) => {
-    res.json(req.user);
+    res.json({
+      id: req.user.id,
+      email: req.user.email
+    });
   }
 );
 

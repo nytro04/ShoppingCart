@@ -10,15 +10,9 @@ const ProfileSchema = new Schema({
   title: {
     type: String
   },
-  // color: {
-  //   type: String
-  // },
   country: {
     type: String
   },
-  // model: {
-  //   type: String
-  // },
   location: {
     type: String
   },
@@ -29,6 +23,14 @@ const ProfileSchema = new Schema({
   phone: {
     type: String,
     required: true
+  },
+  cart: {
+    type: Array,
+    default: []
+  },
+  history: {
+    type: Array,
+    default: []
   }
 });
 

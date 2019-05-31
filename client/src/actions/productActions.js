@@ -45,7 +45,7 @@ export const editProduct = (productData, id, history) => dispatch => {
     );
 };
 
-// Get Products
+// Get All Products
 export const getProducts = () => dispatch => {
   dispatch(setProductLoading());
   axios

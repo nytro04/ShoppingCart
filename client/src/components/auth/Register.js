@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { Link } from "react-router-dom";
+
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import { withRouter } from "react-router-dom";
@@ -32,12 +34,13 @@ class Register extends Component {
 
   onSubmit = e => {
     e.preventDefault();
+    const { name, email, password, password2 } = this.state;
 
     const newUser = {
-      name: this.state.name,
-      email: this.state.email,
-      password: this.state.password,
-      password2: this.state.password2
+      name,
+      email,
+      password,
+      password2
     };
 
     this.props.registerUser(newUser, this.props.history);
@@ -93,6 +96,11 @@ class Register extends Component {
 
                 <input type="submit" className="btn btn-info btn-block mt-4" />
               </form>
+              <small className="form-text text-muted">
+                <Link className="nav-link" to="/login">
+                  Already Registered? Log In Here
+                </Link>
+              </small>
             </div>
           </div>
         </div>

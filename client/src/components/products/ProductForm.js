@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import TextAreaFieldGroup from "../common/TextAreaFieldGroup";
 import TextFieldGroup from "../common/TextFieldGroup";
 import { addProduct } from "../../actions/productActions";
+import ImageUpload from "../common/ImageUpload";
 
 class ProductForm extends Component {
   state = {
@@ -83,6 +84,7 @@ class ProductForm extends Component {
                   onChange={this.onChange}
                   error={errors.image}
                 />
+                <ImageUpload />
               </div>
               <button className="btn btn-dark">Submit</button>
             </form>
