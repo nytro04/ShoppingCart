@@ -7,7 +7,7 @@ module.exports = function validateLoginInput(data) {
   data.image = !isEmpty(data.image) ? data.image : "";
 
   if (Validator.isEmpty(data.image)) {
-    errors.image = "Email field is required";
+    errors.image = "No file uploaded";
   }
 
   return {

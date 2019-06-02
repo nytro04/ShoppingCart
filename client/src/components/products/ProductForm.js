@@ -77,13 +77,13 @@ class ProductForm extends Component {
                   onChange={this.onChange}
                   error={errors.description}
                 />
-                <TextFieldGroup
+                {/* <TextFieldGroup
                   placeholder="Picture of your product"
                   name="image"
                   value={this.state.image}
                   onChange={this.onChange}
                   error={errors.image}
-                />
+                /> */}
                 <ImageUpload />
               </div>
               <button className="btn btn-dark">Submit</button>

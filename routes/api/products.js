@@ -44,7 +44,10 @@ router.post(
     // Destructuring
 
     const { errors, isValid } = validateProductInput(req.body);
-    const { name, description, price, image } = req.body;
+
+    // const image = req.files.file;
+
+    const { name, description, price } = req.body;
 
     // Check validation
     if (!isValid) {
@@ -57,7 +60,7 @@ router.post(
       name,
       description,
       price,
-      image,
+      // image,
       user: req.user.id
     });
 
@@ -129,34 +132,6 @@ router.delete(
             res.status(404).json({ productnotfound: "No product found" })
           );
       });
-    });
-  }
-);
-
-// @route       UPLOAD IMAGE api/products/
-// @desc        Upload Image
-// @access      Private // TODO... for admins only
-app.post(
-  "/api/products/upload",
-  passport.authenticate("jwt", { session: false }),
-  (req, res) => {
-    // destructuring
-    const { errors, isValid } = validateProductInput(req.body);
-
-    if (!isValid) {
-      // if any errors, send 400 with errors object
-      return res.status(400).json(errors);
-    }
-
-    const file = req.files.file;
-
-    file.mv(`${__dirname}/client/public/uploads/${file.name}`, err => {
-      if (err) {
-        console.log(err);
-        return res.status(500).send(err);
-      }
-
-      res.json({ fileName: file.name, filePath: `/uploads/${file.name}` });
     });
   }
 );
