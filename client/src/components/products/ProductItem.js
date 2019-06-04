@@ -8,13 +8,6 @@ import { addToCart } from "../../actions/cartAction";
 class ProductItem extends Component {
   // adds cart item to cart list
   HandleAddToCart = () => {
-    // const cartItem = {
-    //   id: product._id,
-    //   name: product.name,
-    //   description: product.description,
-    //   price: product.price
-    // };
-
     this.props.addToCart(this.props.product);
     // console.log(this.props.product);
   };
@@ -24,7 +17,7 @@ class ProductItem extends Component {
   };
 
   render() {
-    const { auth, product, cart } = this.props;
+    const { auth, product } = this.props;
     // console.log(cart);
     return (
       <div className="container">
@@ -85,8 +78,7 @@ ProductItem.propTypes = {
   deleteProduct: PropTypes.func.isRequired,
   product: PropTypes.object.isRequired,
   auth: PropTypes.object.isRequired,
-  addToCart: PropTypes.func.isRequired,
-  cart: PropTypes.object.isRequired
+  addToCart: PropTypes.func.isRequired
 };
 
 const mapStateToProps = state => ({

@@ -1,9 +1,4 @@
-import {
-  CART_LOADING,
-  ADD_CART_ITEM,
-  REMOVE_CART_ITEM,
-  GET_CART
-} from "../actions/types";
+import { ADD_CART_ITEM, REMOVE_CART_ITEM, GET_CART } from "../actions/types";
 
 const initialState = {
   cart: [],
@@ -12,11 +7,6 @@ const initialState = {
 
 export default function(state = initialState, action) {
   switch (action.type) {
-    // case CART_LOADING:
-    //   return {
-    //     ...state,
-    //     loading: true
-    //   };
     case ADD_CART_ITEM:
       let cartState = JSON.parse(localStorage.getItem("Cart"));
       cartState = cartState ? cartState : [];
@@ -36,8 +26,19 @@ export default function(state = initialState, action) {
         cart: action.payload
       };
     case REMOVE_CART_ITEM:
+      cartState = JSON.parse(localStorage.getItem("Cart"));
+      cartState = cartState ? cartState : [];
+
+      localStorage.setItem(
+        "Cart",
+        JSON.stringify([
+          ...cartState.filter(cartItem => cartItem._id !== action.payload)
+        ])
+      );
+
       return {
-        cart: state.cart.filter(cartItem => cartItem._id !== action.payload)
+        ...state,
+        cart: JSON.parse(localStorage.getItem("Cart"))
       };
     default:
       return state;

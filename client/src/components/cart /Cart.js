@@ -19,8 +19,8 @@ class Cart extends Component {
 
     let cartContent;
 
-    if (cart === null || loading) {
-      cartContent = <p>No items in Cart</p>;
+    if (cart === null) {
+      cartContent = <div>No items in Cart</div>;
     } else {
       cartContent = <AllCart cart={cart} />;
     }

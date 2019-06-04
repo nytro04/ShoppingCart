@@ -1,7 +1,14 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import { connect } from "react-redux";
+import { removeFromCart } from "../../actions/cartAction";
 
 class CartItem extends Component {
+  onDeleteClick = id => {
+    console.log(id);
+    this.props.removeFromCart(id);
+  };
+
   render() {
     const { itemInCart } = this.props;
 
@@ -56,7 +63,11 @@ class CartItem extends Component {
               </div>
             </div>
             <div className="col-2 col-sm-2 col-md-2 text-right">
-              <button type="button" className="btn btn-outline-danger btn-xs">
+              <button
+                onClick={this.onDeleteClick.bind(this, itemInCart._id)}
+                type="button"
+                className="btn btn-outline-danger btn-xs"
+              >
                 <i className="fa fa-trash" aria-hidden="true" />
               </button>
             </div>
@@ -69,7 +80,17 @@ class CartItem extends Component {
 }
 
 CartItem.propTypes = {
-  cart: PropTypes.object.isRequired
+  itemInCart: PropTypes.object.isRequired,
+  removeFromCart: PropTypes.func.isRequired
 };
 
-export default CartItem;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+
+export default connect(
+  mapStateToProps,
+  { removeFromCart }
+)(CartItem);
+
+// export default CartItem;

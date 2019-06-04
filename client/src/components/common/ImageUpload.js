@@ -19,7 +19,7 @@ class ImageUpload extends Component {
     formData.append("file", this.state.file);
 
     axios
-      .post("/upload", formData, config)
+      .post("api/image/upload", formData, config)
       .then(res => {
         const { fileName, filePath } = res.data;
         this.setState({ uploadedFile: { fileName, filePath } });
