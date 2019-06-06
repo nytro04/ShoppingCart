@@ -2,6 +2,8 @@ const express = require("express");
 const router = express.Router();
 const mongoose = require("mongoose");
 const passport = require("passport");
+const cloudinary = require("cloudinary");
+const keys = require("../../config/keys");
 
 // Load Product Model
 const Product = require("../../models/Product");
@@ -10,6 +12,10 @@ const Profile = require("../../models/Profile");
 
 // Validation
 const validateProductInput = require("../../validation/product");
+
+const cName = keys.CLOUD_NAME;
+const cApiKey = keys.CLOUD_API_KEY;
+const cApiSecret = keys.CLOUD_API_SECRET;
 
 // @route       GET api/products
 // @desc        Get all products
@@ -133,6 +139,22 @@ router.delete(
           );
       });
     });
+  }
+);
+
+router.post(
+  "/upload",
+  passport.authenticate("jwt", { session: false }),
+  (req, res) => {
+    cloudinary.config({
+      cloud_name: cName,
+      api_key: cApiKey,
+      api_secret: cApiSecret
+    });
+
+    const path = Object.values(Object.values(req.files)[0])[0].path;
+
+    cloudinary.uploader.upload(path).then(image => res.json([image]));
   }
 );
 

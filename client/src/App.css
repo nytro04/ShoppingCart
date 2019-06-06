@@ -5,7 +5,18 @@ footer {
   width: 100%;
 }
 
-.quantity {
+.top-header .container {
+  padding-top: 2.1rem;
+  padding-bottom: 2.1rem;
+  border-bottom: 1px solid #dededd;
+}
+
+.top-header .contact-number {
+  font-size: 0.8rem;
+  color: #333;
+}
+
+/* .quantity {
   float: left;
   margin-right: 15px;
   background-color: #eee;
@@ -71,4 +82,4 @@ footer {
 }
 .shopping-cart {
   margin-top: 20px;
-}
+} */

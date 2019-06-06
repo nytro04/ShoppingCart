@@ -15,9 +15,11 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
+    "cloudinary": "^1.14.0",
     "concurrently": "^4.0.1",
     "express": "^4.16.3",
     "express-fileupload": "^1.1.4",
+    "express-form-data": "^2.0.8",
     "gravatar": "^1.6.0",
     "http-proxy-middleware": "^0.19.1",
     "jsonwebtoken": "^8.3.0",

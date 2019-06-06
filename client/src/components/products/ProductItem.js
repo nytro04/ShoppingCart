@@ -61,7 +61,7 @@ class ProductItem extends Component {
                 <p>{product.description}...</p>
               </div>
               <span onClick={this.HandleAddToCart} className="ad-btn mx-1">
-                <i className="fas fa-shopping-cart" />
+                <i class="fas fa-cart-plus" />
               </span>
               <Link className="ad-btn mx-1" to={`/product/${product._id}`}>
                 <i className="fas fa-eye" />
