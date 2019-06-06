@@ -142,6 +142,9 @@ router.delete(
   }
 );
 
+// @route       POST api/products/upload
+// @desc        upload image
+// @access      Private // TODO... for admins only
 router.post(
   "/upload",
   passport.authenticate("jwt", { session: false }),

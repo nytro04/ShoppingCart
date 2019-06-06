@@ -33,8 +33,8 @@ class Product extends Component {
                               {" "}
                               <img
                                 className="img-fluid"
-                                src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262"
-                                // src={product.image}
+                                // src="https://imageonthefly.autodatadirect.com/images/?USER=eDealer&PW=edealer872&IMG=USC80HOC011A021001.jpg&width=440&height=262"
+                                src={product.image}
                                 alt="Alternate Text"
                               />
                             </div>
