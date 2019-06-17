@@ -12,39 +12,55 @@ class ProductForm extends Component {
     name: "",
     price: "",
     description: "",
-    image: "",
+    image: null,
     errors: {}
   };
 
-  imagesHandler = e => {
-    const files = Array.from(e.target.files);
+  // imageSelectedHandler = e => {
+  //   this.setState({
+  //     image: e.target.files[0]
+  //   });
+  // };
 
-    const formData = new FormData();
-    const types = ["image/png", "image/jpeg", "image/gif"];
+  imageUploadHandler = e => {
+    console.log("##########");
+    // console.log(e.target.files[0]);
+    const fd = new FormData();
+    fd.append("file", e.target.files[0]);
 
-    const config = { headers: { "content-type": "multipart/form-data" } };
-
-    files.forEach((file, i) => {
-      if (types.every(type => file.type !== type)) {
-        this.setState({ errors: `"${file.type}" is not a supported format` });
-      }
-
-      if (file.size > 150000) {
-        this.setState({
-          errors: `"${file.name}" is too large, please upload a smaller picture`
-        });
-      }
-
-      formData.append(i, file);
-    });
+    console.log("*************");
+    console.log(this.state.image);
 
     axios
-      .post("api/products/upload", formData, config)
-      .then(images => {
-        // const { fileName, filePath } = res.data;
-        this.setState({ image: images });
+      .post("api/products/upload", fd)
+      .then(res => {
+        console.log(res.data);
+        // this.setState({ image: images });
       })
       .catch(err => console.log(err));
+
+    // const files = Array.from(e.target.files);
+
+    // const formData = new FormData();
+    // const types = ["image/png", "image/jpeg", "image/gif"];
+
+    // const config = { headers: { "content-type": "multipart/form-data" } };
+
+    // files.forEach((file, i) => {
+    //   if (types.every(type => file.type !== type)) {
+    //     this.setState({ errors: `"${file.type}" is not a supported format` });
+    //   }
+
+    //   if (file.size > 150000) {
+    //     this.setState({
+    //       errors: `"${file.name}" is too large, please upload a smaller picture`
+    //     });
+    //   }
+
+    //   files.forEach((file, i) => {
+    //     formData.append(i, file);
+    //   });
+    // });
   };
 
   componentWillReceiveProps(newProps) {
@@ -87,7 +103,21 @@ class ProductForm extends Component {
           <div className="card-body">
             <form onSubmit={this.onSubmit}>
               <div className="form-group">
-                <ImageUpload imagesHandler={this.imagesHandler} />
+                <div className="imageUpload">
+                  <input type="file" />
+                  <button onClick={this.imageUploadHandler}>Upload</button>
+                </div>
+                {/* <ImageUpload imagesHandler={this.imagesHandler} /> */}
+                {/* <div className="">
+                  <label htmlFor="upload files">Upload Your File</label>
+                  <input
+                    type="file"
+                    name="file"
+                    className="form-control"
+                    onChange={this.imagesHandler}
+                  />
+                </div> */}
+
                 <TextFieldGroup
                   placeholder="name of product"
                   name="name"

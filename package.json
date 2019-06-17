@@ -8,7 +8,8 @@
     "start": "node server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "author": "Francis Badasu",
   "license": "MIT",
@@ -18,12 +19,13 @@
     "cloudinary": "^1.14.0",
     "concurrently": "^4.0.1",
     "express": "^4.16.3",
-    "express-fileupload": "^1.1.4",
+    "express-fileupload": "^1.1.5",
     "express-form-data": "^2.0.8",
     "gravatar": "^1.6.0",
     "http-proxy-middleware": "^0.19.1",
     "jsonwebtoken": "^8.3.0",
     "mongoose": "^5.2.16",
+    "multer": "^1.4.1",
     "passport": "^0.4.0",
     "passport-jwt": "^4.0.0",
     "validator": "^10.7.1"

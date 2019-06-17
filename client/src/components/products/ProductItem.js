@@ -30,7 +30,7 @@ class ProductItem extends Component {
                   to={`/edit-product/${product._id}`}
                 >
                   {/* <i class="fas fa-edit" /> */}
-                  <i class="fas fa-pencil-alt" />
+                  <i className="fas fa-pencil-alt" />
                 </Link>
               ) : null}
 

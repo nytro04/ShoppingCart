@@ -8,10 +8,10 @@ const ImageUpload = ({ imagesHandler }) => {
           type="file"
           id="customFile"
           className="custom-file-input"
-          imagesHandler={imagesHandler}
+          onChange={imagesHandler}
         />
         <label class="custom-file-label" for="customFile">
-          Choose file
+          Choose image
         </label>
       </div>
     </div>
